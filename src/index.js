@@ -9,6 +9,7 @@ import Faculties from './pages/Faculties';
 import DetailFaculty from './pages/DetailFaculty';
 import StateDemo from './pages/StateDemo';
 import DemoCalc from './pages/DemoCalc';
+import CrudOperation from './pages/CrudOperation';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,6 +24,7 @@ root.render(
         <Route path="/faculty/:id" element={<DetailFaculty/>} />
         <Route path="/state" element={<StateDemo/>} />
         <Route path="/calc" element={<DemoCalc/>} />
+        <Route path="/crud" element={<CrudOperation/>} />
       </Route>
     </Routes>
   </BrowserRouter>

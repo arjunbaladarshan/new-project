@@ -30,6 +30,9 @@ function Menu(){
                             <li class="nav-item">
                                 <Link class="nav-link" aria-current="page" to="/calc">Calc</Link>
                             </li>
+                            <li class="nav-item">
+                                <Link class="nav-link" aria-current="page" to="/crud">CRUD</Link>
+                            </li>
                             
                         </ul>
                         <form class="d-flex" role="search">
