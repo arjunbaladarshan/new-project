@@ -10,6 +10,7 @@ import DetailFaculty from './pages/DetailFaculty';
 import StateDemo from './pages/StateDemo';
 import DemoCalc from './pages/DemoCalc';
 import CrudOperation from './pages/CrudOperation';
+import FetchDemo from './pages/FetchDemo';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +26,7 @@ root.render(
         <Route path="/state" element={<StateDemo/>} />
         <Route path="/calc" element={<DemoCalc/>} />
         <Route path="/crud" element={<CrudOperation/>} />
+        <Route path="/fetch" element={<FetchDemo/>} />
       </Route>
     </Routes>
   </BrowserRouter>

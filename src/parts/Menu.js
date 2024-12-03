@@ -16,22 +16,25 @@ function Menu(){
                                 <Link class="nav-link" aria-current="page" to="/">Home</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" aria-current="page" to="/about">About</Link>
+                                <Link class="nav-link" aria-current="page" to="/about">Abt</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" aria-current="page" to="/contact">Contact</Link>
+                                <Link class="nav-link" aria-current="page" to="/contact">Cont</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" aria-current="page" to="/faculties">Faculties</Link>
+                                <Link class="nav-link" aria-current="page" to="/faculties">Fac</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link" aria-current="page" to="/state">State demo</Link>
+                                <Link class="nav-link" aria-current="page" to="/state">State</Link>
                             </li>
                             <li class="nav-item">
                                 <Link class="nav-link" aria-current="page" to="/calc">Calc</Link>
                             </li>
                             <li class="nav-item">
                                 <Link class="nav-link" aria-current="page" to="/crud">CRUD</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link" aria-current="page" to="/fetch">Fetch</Link>
                             </li>
                             
                         </ul>

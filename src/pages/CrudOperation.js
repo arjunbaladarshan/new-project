@@ -1,35 +1,77 @@
 import React, { useState } from 'react'
 
 const CrudOperation = () => {
-    let [subjects, setSubjects] = useState(["OS",".net"]);
-    const [data,setData] = useState("");
 
-    let foramtedSubjects = subjects.map((sub, id)=>{
-        return (
+    let [data,setData] = useState([
+        {subjectName:"React", subjectCode:101, subjectFaculty:"asdf"},
+        {subjectName:"OS", subjectCode:102, subjectFaculty: "asdf"},
+        {subjectName:".Net", subjectCode:103, subjectFaculty:"gsfdfg"}
+    ]);
+
+    fetch("https://62d6c51451e6e8f06f12bd5d.mockapi.io/faculties")
+    .then(res=>res.json())
+    .then(res=>setData(res));
+
+    const [subject, setSubject] = useState({
+        subjectName:"",
+        subjectCode:"",
+        subjectFaculty:""
+    })
+
+    const subjectFormated = data.map((sub)=>{
+        return(
             <>
-                <tr><td>{sub}</td> <td> <button className='btn btn-danger' onClick={()=>{
-                    subjects.splice(id,1)
-                    setSubjects([...subjects]);
-                }}>Delete</button></td></tr>
+                <tr>
+                    <td>{sub.subjectName}</td>
+                    <td>{sub.subjectCode}</td>
+                    <td>{sub.subjectFaculty}</td>
+                </tr>
             </>
         );
     })
 
-
     return(
         <>
-            Enter Name: 
-            <input type='text' value={data} onChange={(e=>{
-                setData(e.target.value);
-            })} />
-            <button onClick={()=>{
-                setSubjects([...subjects, data]);
-                setData("");
-            }}>
-                Add
-            </button>
+           
             <table>
-                {foramtedSubjects}
+                <tr>    
+                    <td>Enter Subject Name</td>
+                    <td>:</td>
+                    <td><input type='text' value={subject.subjectName} onChange={(e)=>{
+                        setSubject({...subject, subjectName:e.target.value});
+                    }} /></td>
+                </tr>
+                <tr>    
+                    <td>Enter Subject Code</td>
+                    <td>:</td>
+                    <td><input type='text' value={subject.subjectCode} onChange={(e)=>{
+                        setSubject({...subject, subjectCode:e.target.value});
+                    }}/></td>
+                </tr>
+                <tr>    
+                    <td>Enter Subject Faculty</td>
+                    <td>:</td>
+                    <td><input type='text' value={subject.subjectFaculty} onChange={(e)=>{
+                        setSubject({...subject, subjectFaculty:e.target.value});
+                    }}/></td>
+                </tr>
+                <tr>
+                    <td colSpan={3} align='center'>
+                        <button onClick={()=>{
+                           
+                            setData([...data,subject]);
+                            setSubject({
+                                subjectCode:"",
+                                subjectName:"",
+                                subjectFaculty:""
+                            })
+                        }}>Add</button>
+                    </td>
+                </tr>
+            </table>
+
+            <table className='table'>
+                {subjectFormated}
             </table>
         </>
     );
