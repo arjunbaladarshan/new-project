@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const CrudOperation = () => {
 
@@ -8,9 +9,11 @@ const CrudOperation = () => {
         {subjectName:".Net", subjectCode:103, subjectFaculty:"gsfdfg"}
     ]);
 
-    fetch("https://62d6c51451e6e8f06f12bd5d.mockapi.io/faculties")
-    .then(res=>res.json())
-    .then(res=>setData(res));
+    useEffect(()=>{
+        fetch("https://62d6c51451e6e8f06f12bd5d.mockapi.io/faculties")
+        .then(res=>res.json())
+        .then(res=>setData(res));
+    },[]);
 
     const [subject, setSubject] = useState({
         subjectName:"",
@@ -23,8 +26,7 @@ const CrudOperation = () => {
             <>
                 <tr>
                     <td>{sub.subjectName}</td>
-                    <td>{sub.subjectCode}</td>
-                    <td>{sub.subjectFaculty}</td>
+                    <td><Link to={"/subject/"+sub.id} className='btn btn-primary'>Detail</Link></td>
                 </tr>
             </>
         );

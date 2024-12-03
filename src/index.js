@@ -11,6 +11,8 @@ import StateDemo from './pages/StateDemo';
 import DemoCalc from './pages/DemoCalc';
 import CrudOperation from './pages/CrudOperation';
 import FetchDemo from './pages/FetchDemo';
+import EffectDemo from './pages/EffectDemo';
+import DetailSubject from './pages/DetailSubject';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,6 +29,9 @@ root.render(
         <Route path="/calc" element={<DemoCalc/>} />
         <Route path="/crud" element={<CrudOperation/>} />
         <Route path="/fetch" element={<FetchDemo/>} />
+        <Route path="/effect" element={<EffectDemo/>} />
+        <Route path="/subject/:id" element={<DetailSubject/>} />
+
       </Route>
     </Routes>
   </BrowserRouter>
