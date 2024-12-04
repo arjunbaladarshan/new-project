@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CrudOperation = () => {
 
-    let [data,setData] = useState([
-        {subjectName:"React", subjectCode:101, subjectFaculty:"asdf"},
-        {subjectName:"OS", subjectCode:102, subjectFaculty: "asdf"},
-        {subjectName:".Net", subjectCode:103, subjectFaculty:"gsfdfg"}
-    ]);
+    const [data,setData] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
+   
+   
+    useEffect(()=>{
+        setInterval(()=>{
+            console.log("State Changed");
+            setIsUpdated(!isUpdated);
+        },10000);
+    },[]);
 
     useEffect(()=>{
+        console.log("API Called");
         fetch("https://62d6c51451e6e8f06f12bd5d.mockapi.io/faculties")
         .then(res=>res.json())
         .then(res=>setData(res));
-    },[]);
-
+    },[isUpdated]);
+    const apiUrl = "https://62d6c51451e6e8f06f12bd5d.mockapi.io/faculties/";
+    const navigate = useNavigate();
     const [subject, setSubject] = useState({
         subjectName:"",
         subjectCode:"",
@@ -27,6 +34,18 @@ const CrudOperation = () => {
                 <tr>
                     <td>{sub.subjectName}</td>
                     <td><Link to={"/subject/"+sub.id} className='btn btn-primary'>Detail</Link></td>
+                    <td>
+                    <button className='btn btn-danger' onClick={()=>{
+                        fetch(apiUrl+sub.id, {method:"DELETE"})
+                        .then(res=>res.json())
+                        .then(res=>{
+                            setIsUpdated(!isUpdated);
+                        });
+                        
+                        }}>
+                        Delete
+                        </button>
+                    </td>
                 </tr>
             </>
         );
@@ -34,7 +53,7 @@ const CrudOperation = () => {
 
     return(
         <>
-           
+            <h1>Data = {isUpdated}</h1>
             <table>
                 <tr>    
                     <td>Enter Subject Name</td>
