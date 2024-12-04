@@ -6,13 +6,7 @@ const CrudOperation = () => {
     const [data,setData] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
    
-   
-    useEffect(()=>{
-        setInterval(()=>{
-            console.log("State Changed");
-            setIsUpdated(!isUpdated);
-        },10000);
-    },[]);
+
 
     useEffect(()=>{
         console.log("API Called");
@@ -53,44 +47,42 @@ const CrudOperation = () => {
 
     return(
         <>
-            <h1>Data = {isUpdated}</h1>
             <table>
-                <tr>    
+                <tr>
                     <td>Enter Subject Name</td>
-                    <td>:</td>
-                    <td><input type='text' value={subject.subjectName} onChange={(e)=>{
+                    <td><input value={subject.subjectName} type='text' onChange={(e)=>{
                         setSubject({...subject, subjectName:e.target.value});
                     }} /></td>
                 </tr>
-                <tr>    
+                <tr>
                     <td>Enter Subject Code</td>
-                    <td>:</td>
-                    <td><input type='text' value={subject.subjectCode} onChange={(e)=>{
+                    <td><input value={subject.subjectCode} type='text' onChange={(e)=>{
                         setSubject({...subject, subjectCode:e.target.value});
-                    }}/></td>
-                </tr>
-                <tr>    
-                    <td>Enter Subject Faculty</td>
-                    <td>:</td>
-                    <td><input type='text' value={subject.subjectFaculty} onChange={(e)=>{
-                        setSubject({...subject, subjectFaculty:e.target.value});
-                    }}/></td>
+                    }} /></td>
                 </tr>
                 <tr>
-                    <td colSpan={3} align='center'>
-                        <button onClick={()=>{
-                           
-                            setData([...data,subject]);
-                            setSubject({
-                                subjectCode:"",
-                                subjectName:"",
-                                subjectFaculty:""
-                            })
-                        }}>Add</button>
-                    </td>
+                    <td>Enter Subject Fac</td>
+                    <td><input value={subject.subjectFaculty} type='text' onChange={(e)=>{
+                        setSubject({...subject, subjectFaculty:e.target.value});
+                    }} /></td>
+                </tr>
+                <tr>
+                    <td colSpan={2}><button className='btn btn-primary' onClick={()=>{
+                        fetch(apiUrl,{
+                            method:"POST",
+                            body:JSON.stringify(subject),
+                            headers:{
+                              "Content-Type":"application/json"  
+                            }
+                        })
+                        .then(res=>res.json())
+                        .then(res=>{
+                            setIsUpdated(!isUpdated);
+                            setSubject({subjectCode:"",subjectName:"",subjectFaculty:""})
+                        });
+                    }}>Add</button></td>
                 </tr>
             </table>
-
             <table className='table'>
                 {subjectFormated}
             </table>
